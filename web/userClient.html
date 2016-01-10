@@ -9,7 +9,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/pubnub/3.7.7/pubnub.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<script src="parse-1.2.13.min.js"></script>
-		<script src="pollApp.js"></script>
+		<script src="userClient.js"></script>
 		<script src="questionsData.js"></script>
 
 	</head>
@@ -17,24 +17,17 @@
 	<body>
 		<div>
 			<div>
-				<h3 align="center"> Welcome </h3>
+				<h3 align="center"> Welcome Guest</h3>
 			</div>
 			<div align="center">
-				Which Question you want to Publish
+				<h4 id="questionTitle"></h4>
 				<div>
-					<Button class="btn btn-primary" onclick="pulishQuestion('Q1')">
-						Question1
-					</Button>
-					<Button class="btn btn-primary" onclick="pulishQuestion('Q2')">
-						Question2
-					</Button>
-					<Button class="btn btn-primary" onclick="pulishQuestion('Q3')">
-						Question3
-					</Button>
-					<Button class="btn btn-primary" onclick="pulishQuestion('Q4')">
-						Question4
-					</Button>
+					<button class="btn btn-primary" onclick="answerClicked('A')" id="btnOption1"></button>
+					<button id="btnOption2" class="btn btn-primary" onclick="answerClicked('B')"></button>
+					<button id="btnOption3" class="btn btn-primary" onclick="answerClicked('C')"></button>
+					<button id="btnOption4" class="btn btn-primary" onclick="answerClicked('D')"></button>
 				</div>
+
 				<br/>
 				<div >
 					<div id="selectedQuestionDetails">
