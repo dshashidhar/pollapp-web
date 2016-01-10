@@ -17,7 +17,7 @@ pubnub.time(
 
 function pulishQuestion(questionId) {
   currentQuestion = questionId;
-  alert("test")
+  alert("test");
   $.("selectedQuestionDetails").text = questionList[questionId].question;
   publish(questionId);
 }
