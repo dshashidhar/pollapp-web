@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 	<head>
 		<title>Deloitte Polling App</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
@@ -8,40 +7,61 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/pubnub/3.7.7/pubnub.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-		<script src="parse-1.2.13.min.js"></script>
-		<script src="userClient.js"></script>
-		<script src="questionsData.js"></script>
-
+		<script src="js/parse-1.2.13.min.js"></script>
+		<script src="js/userClient.js"></script>
+		<script src="js/questionsData.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 
 	<body>
+
+		<style>
+			.btn.btn-primary {
+				width: 90%;
+				clear: both;
+				display: block;
+				float: left;
+				margin: 5px 5%;
+				text-align: left;
+			}
+			
+			.btn-submit {
+				width: 60%;
+				clear: both;
+				display: block;
+				margin: 15px 5%;
+				text-align: center;
+			}
+			
+		</style>
 		<div>
 			<div>
 				<h3 align="center"> Welcome Guest </h3>
 			</div>
-			<div align="center">
+			<div id="welcomeMsg" align="center">
+				<h5> Please wait till your question populate here </h5>
+			</div>
+			<div align="center" id="mainContainer" style="display: none">
 				<h4 id="questionTitle"></h4>
 				<div>
-					<button class="btn btn-primary" onclick="answerClicked('A')" id="btnOption1"></button>
-					<button id="btnOption2" class="btn btn-primary" onclick="answerClicked('B')"></button>
-					<button id="btnOption3" class="btn btn-primary" onclick="answerClicked('C')"></button>
-					<button id="btnOption4" class="btn btn-primary" onclick="answerClicked('D')"></button>
+					<button class="btn btn-primary " onclick="answerClicked(event,'A')" id="btnOption1"></button>
+					<button id="btnOption2" class="btn btn-primary " onclick="answerClicked(event,'B')"></button>
+					<button id="btnOption3" class="btn btn-primary " onclick="answerClicked(event,'C')"></button>
+					<button id="btnOption4" class="btn btn-primary " onclick="answerClicked(event,'D')"></button>
 				</div>
 
 				<br/>
 				<div >
 					<div id="selectedQuestionDetails">
-
+						<button id="btnSubmit" class="btn btn-success btn-submit" onclick="doSubmit()"> Submit </button>
 					</div>
-					<Button class="btn btn-success" onclick="createChart('Q4')">
-						Show Results
-					</Button>
+					<!--<Button class="btn btn-success" onclick="createChart('Q4')">
+					Show Results
+					</Button> -->
 				</div>
 			</div>
 		</div>
-		<div align="center" style="width:200px;height:400px;margin:auto">
-			<canvas id="canvas" style="width:100%;height:100%"></canvas>
-		</div>
+
 	</body>
 
 </html>

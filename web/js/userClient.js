@@ -3,6 +3,7 @@ Parse.initialize("E6NcavnlQIXSS8dxbd5j6jaceeZhV9snl2A7RmVp", "kcR3JVGoXWAiEuwiKM
 var pollResults = Parse.Object.extend("pollResults");
 var pubnub;
 var currentQuestion = {};
+var userAnswer = "";
 
 pubnub = PUBNUB({
     publish_key : 'demo-36',
@@ -10,7 +11,7 @@ pubnub = PUBNUB({
 })
 
 pubnub.time(function(time) {
-    console.log(time)
+    console.log(time);
 });
 
 pubnubSubscribe();
@@ -21,12 +22,16 @@ function pubnubSubscribe() {
         channel : "hello_world",
         message : function(message, env, ch, timer, magic_ch) {
             messageReceived(message);
-            console.log("Message Received." + '<br>' + "Channel: " + ch + '<br>' + "Message: " + JSON.stringify(message) + '<br>' + "Raw Envelope: " + JSON.stringify(env) + '<br>' + "Magic Channel: " + JSON.stringify(magic_ch))
+            console.log("Message Received." + '<br>' + "Channel: " + ch + '<br>' + "Message: " + JSON.stringify(message) + '<br>' + "Raw Envelope: " + JSON.stringify(env) + '<br>' + "Magic Channel: " + JSON.stringify(magic_ch));
         }
     });
 }
 
 function messageReceived(question) {
+			 $("#welcomeMsg").css("display", "None");
+    $(".btn-warning").removeClass("btn-warning");
+    $("#mainContainer").css("display", "block");
+    $('#btnSubmit').attr("disabled", false);
     currentQuestion = question;
     $("#questionTitle").text(question.question);
     $("#btnOption1").text("A ." + question.options[0].value);
@@ -35,13 +40,20 @@ function messageReceived(question) {
     $("#btnOption4").text("D ." + question.options[3].value);
 }
 
-function answerClicked(answer) {
-  
+function answerClicked(event,answer) {
+				var target = event.target || event.srcElement;
+    $(".btn-warning").removeClass("btn-warning");
+    $("#"+target.id).addClass("btn-warning");
+    userAnswer = answer;
+}
+
+function doSubmit() {
+     $('#btnSubmit').attr("disabled", true);
     var PollResults = Parse.Object.extend("pollResults");
     var pollResults = new PollResults();
 
     pollResults.set("QuestionId", currentQuestion.questionId);
-    pollResults.set("Response", answer);
+    pollResults.set("Response", userAnswer);
     pollResults.set("userName", "Kamal-web");
 
     pollResults.save(null, {
